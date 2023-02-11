@@ -37,8 +37,23 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
-function decode(expr) {
-    // write your solution here
+function decode(code){
+  let arr = []
+  let subArr = []
+  let star = code.replace(/\*/g, '7').match(/\d{10}/g)
+  
+  for (let index = 0; index < star.length; index++) {
+    arr.push(star[index].replace(/11/g, '-').replace(/10/g, '.').replace(/0/g, '').replace(/7{10}/g, ' '))
+  }
+  
+
+  for (let index = 0; index < arr.length; index++) {
+    arr[index] === ' ' && subArr.push(' ')
+    for (const key in MORSE_TABLE) {
+          key === arr[index] && subArr.push(MORSE_TABLE[key])
+        }
+      }
+   return subArr.join('')
 }
 
 module.exports = {
